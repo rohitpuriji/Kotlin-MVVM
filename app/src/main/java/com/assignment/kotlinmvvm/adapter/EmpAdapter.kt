@@ -8,6 +8,8 @@ import com.assignment.kotlinmvvm.DataModel.Android
 import com.assignment.kotlinmvvm.MainActivity
 import com.assignment.kotlinmvvm.R
 import com.assignment.kotlinmvvm.interfaces.ItemClickListener
+import com.jakewharton.rxbinding.view.RxView
+import com.jakewharton.rxbinding.widget.RxTextView
 import kotlinx.android.synthetic.main.items.view.*
 
 class EmpAdapter(var context: MainActivity, var mEmpList: ArrayList<Android>, private val itemClick:ItemClickListener): RecyclerView.Adapter<EmpAdapter.EmpHolder>()  {
@@ -17,7 +19,7 @@ class EmpAdapter(var context: MainActivity, var mEmpList: ArrayList<Android>, pr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmpHolder {
-        var view = LayoutInflater.from(context).inflate(R.layout.items, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.items, parent, false)
         return EmpHolder(view)
     }
 
@@ -27,9 +29,10 @@ class EmpAdapter(var context: MainActivity, var mEmpList: ArrayList<Android>, pr
 
     override fun onBindViewHolder(holder:EmpHolder, position: Int) {
         mItemClickListener = itemClick
-        holder?.tvFname?.text = mEmpList[position].name
-        holder?.tvLname?.text = mEmpList[position].apiLevel
-        holder?.mView.setOnClickListener {
+        holder.tvFname?.text = mEmpList[position].name
+        holder.tvLname?.text = mEmpList[position].apiLevel
+
+        RxView.clicks(holder.mView).subscribe {
             mItemClickListener!!.onItemClick(position)
         }
     }

@@ -48,9 +48,9 @@ class RetrofitService {
                     Log.e("on response 1:", i.name)
                 }
 
-                liveUserResponse?.value = list
+                liveUserResponse.value = list
 
-                Log.e("hasActiveObservers 1", liveUserResponse?.hasActiveObservers().toString()+" check")
+                Log.e("hasActiveObservers 1", liveUserResponse.hasActiveObservers().toString()+" check")
 
                 Log.e("on response 2 :", liveUserResponse.toString()+" check")
 
